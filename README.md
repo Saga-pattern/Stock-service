@@ -23,3 +23,14 @@ docker push <your repo>:latest
 ```
 
 ## Event flow send and receive
+### Reserve product
+Stock service will listen for event from kafka "reserve-product" topic and then proceed to check stock
+
+### Product reserved
+After checking the product is correct and in stock. The stock service will send events to kafka's "product-reserved" topic.
+
+### Product cancelled
+If the product check does not exist or the inventory is not enough. The stock service sends events to kafka's "product-cancel" topic.
+
+### Product update
+The stock service will receive events from kafka's "product-update" topic. After that, we will proceed to increase the number of products that need to be updated
